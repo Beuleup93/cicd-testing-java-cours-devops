@@ -6,9 +6,6 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-
-import java.io.IOException;
-import java.net.URISyntaxException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
@@ -44,8 +41,7 @@ import tech.zerofiltre.testing.calcul.domain.model.CalculationType;
 	}
 
 	@Test
-	   void givenOperationsList_whenbatchCalculate_thenReturnsCorrectAnswerList()
-			throws IOException, URISyntaxException {
+	void givenOperationsList_whenbatchCalculate_thenReturnsCorrectAnswerList() {
 		// GIVEN
 		final Stream<String> operations = Arrays.asList("2 + 2", "5 - 4", "6 x 8", "9 / 3").stream();
 

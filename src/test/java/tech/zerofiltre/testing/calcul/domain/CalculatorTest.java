@@ -10,6 +10,7 @@ import java.time.Instant;
 import java.time.LocalDateTime;
 import java.util.Random;
 import java.util.Set;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -119,13 +120,15 @@ class CalculatorTest {
 	@Timeout(1)
 	@Test
 	void longCalcul_shouldComputeInLessThan1Second() {
-		// Arrange
+		// GIVEN
+		long startTime = System.nanoTime();
 
-		// Act
+		// WHEN
 		calculatorUnderTest.longCalculation();
 
-		// Assert
-		// ...
+		// THEN
+		long duration = TimeUnit.NANOSECONDS.toMillis(System.nanoTime() - startTime);
+		assertThat(duration).isLessThan(1000); // Vérifie que l'exécution dure moins de 1 seconde
 	}
 
 	@Test

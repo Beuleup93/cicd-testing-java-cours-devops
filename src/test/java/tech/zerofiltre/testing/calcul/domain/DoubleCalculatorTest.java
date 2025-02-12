@@ -3,6 +3,7 @@ package tech.zerofiltre.testing.calcul.domain;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
    class DoubleCalculatorTest {
 	private Calculator calculatorUnderTest;
@@ -11,19 +12,19 @@ import org.junit.jupiter.api.Test;
 	   void initCalculator() {
 		calculatorUnderTest = new Calculator();
 	}
-	
-	@Test
-	@Disabled("Test ambigue et hors limite du type double")
+
+	   @Test
+	   @Disabled("Problème de précision lié aux erreurs d'arrondi du type double. À revoir avec BigDecimal.")
 	   void subTwoDoubleNumbers_shouldReturnsTheCorrectAnswer() {
-		// GIVEN
-		
-		// WHEN
-		double result = calculatorUnderTest.sub(1.0000000001, 1.0);
-		
-		// THEN
-		if(result != 0.0000000001) {
-			throw new AssertionError(String.format("Erreur :\nAttendu :  0,0000000001\n Résultat : %.10f", result));
-		}
-		
-	}
+		   // GIVEN
+		   double expected = 0.0000000001;
+		   double delta = 1e-10; // Tolérance pour gérer les erreurs d'arrondi
+
+		   // WHEN
+		   double result = calculatorUnderTest.sub(1.0000000001, 1.0);
+
+		   // THEN
+		   assertEquals(expected, result, delta,
+				   String.format("Erreur : Attendu : %.10f, Résultat : %.10f", expected, result));
+	   }
 }
