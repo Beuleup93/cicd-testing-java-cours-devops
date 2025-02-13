@@ -10,4 +10,5 @@ COPY entrypoint.sh entrypoint.sh
 
 RUN chmod 755 entrypoint.sh
 
+# le fichier entrypoint est éxécuté au démarrage du container
 ENTRYPOINT ["./entrypoint.sh"]
